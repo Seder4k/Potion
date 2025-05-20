@@ -102,6 +102,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: background 0.3s;
+      margin-right: 10px;
     }
 
     .clear-btn:hover {
@@ -131,6 +132,7 @@
   <div class="total" id="total-price"></div>
 
   <button class="clear-btn" onclick="clearCart()">Очистити кошик</button>
+  <button class="clear-btn" onclick="checkout()">Оплатити</button>
 
   <script>
     const cartItemsContainer = document.getElementById('cart-items');
@@ -160,6 +162,21 @@
       localStorage.removeItem('cart');
       cart.length = 0;
       renderCart();
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Ваш кошик порожній. Додайте товар перед оплатою.");
+        return;
+      }
+
+      const itemCount = cart.length;
+      const message = itemCount === 1
+        ? "Ви купили товар. Дякуємо за покупку!"
+        : `Ви купили ${itemCount} товари. Дякуємо за покупку!`;
+
+      alert(message);
+      clearCart();
     }
 
     renderCart();
